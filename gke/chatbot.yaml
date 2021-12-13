@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: chatbot
+  name: chatbot
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: chatbot
+  template:
+    metadata:
+      labels:
+        app: chatbot
+    spec:
+      containers:
+      - image: gcr.io/predictive-goal-263306/nthu-line-flask:latest
+        imagePullPolicy: Always
+        name: nthu-line-flask
+        ports:
+        - containerPort: 5000
+        

@@ -1,0 +1,9 @@
+line-bot-sdk
+flask
+APScheduler
+fuzzywuzzy
+python-Levenshtein
+gunicorn
+gevent
+requests
+pyquery

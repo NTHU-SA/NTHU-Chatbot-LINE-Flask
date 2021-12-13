@@ -1,0 +1,36 @@
+image: docker:stable
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
+  GCP_ECR_IMAGE: $GCP_ECR/$GCP_PROJECT/$DOCKER_IMAGE
+  KUBERNETES_DIR: "./gke"
+
+stages:
+  - build
+  - deploy
+
+gcp-build:
+  stage: build
+  image: music1353/gcloud:dind
+  tags:
+    - docker
+  script:
+    - echo $GCP_KEY >> key.json
+    - gcloud auth activate-service-account --key-file key.json
+    - gcloud auth configure-docker
+    - docker build -t $GCP_ECR_IMAGE .
+    - docker push $GCP_ECR_IMAGE
+
+gcp-deploy:
+  stage: deploy
+  image: music1353/gcloud:dind
+  script:
+    - echo $GCP_KEY >> key.json
+    - gcloud auth activate-service-account --key-file key.json
+    - gcloud container clusters get-credentials $GCP_CLUSTER_PROJECT --region $GCP_REGION --project $GCP_PROJECT
+    - kubectl apply -f "$KUBERNETES_DIR/$GCP_APP_NAME.yaml"
+    - kubectl patch deployment $GCP_APP_NAME -p '{"spec":{"template":{"spec":{"terminationGracePeriodSeconds":33}}}}' # for rollout
+    - kubectl rollout status deployment $GCP_APP_NAME
