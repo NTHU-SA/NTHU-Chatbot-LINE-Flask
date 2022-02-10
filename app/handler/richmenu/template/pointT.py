@@ -2,31 +2,6 @@ from linebot.models import *
 from datetime import date
 from datetime import datetime
 
-def timebank_signup_carousel():
-    carousel_template = TemplateSendMessage(        
-        alt_text = '時間銀行註冊',
-        template = CarouselTemplate(  
-            columns = [
-                CarouselColumn(
-                    title = '歡迎成為時間銀行的一員',
-                    text = '輸入清華學校信箱即可註冊！',
-                    thumbnail_image_url='https://i.imgur.com/wcj0NwS.png',
-                    actions = [
-                        URITemplateAction(
-                            label='什麼是時間銀行',
-                            uri='https://telegra.ph/%E6%B8%85%E8%8F%AF%E5%B9%A3%E8%88%87%E6%99%82%E9%96%93%E9%8A%80%E8%A1%8C%E4%BB%8B%E7%B4%B9-06-10'
-                        ),
-                        PostbackTemplateAction(
-                            label='我要註冊',
-                            data='source=richmenu&flag=point&info=signup'
-                        )
-                    ]
-                )
-            ]
-        )
-    )
-    return carousel_template
-
 def isExisted():
     text_template = TextSendMessage(text="您已註冊！前往時間銀行專區")
     return text_template

@@ -3,7 +3,7 @@ from linebot.models import *
 import json
 
 from app import app
-from API import UserAPI, BusAPI, DataAPI, TimebankAPI
+from API import UserAPI, BusAPI, DataAPI
 from app.handler.richmenu.template import busT, epidemicT, locationT, stopT, affairT, recnewsT, linggleT, usrT, phoneT, recruitmentT, pointT
 from app.handler.command.template import IntroTemplate
 from utils import busUtil, locationUtil, recnewUtil, schoolRecruitUtil

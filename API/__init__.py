@@ -6,4 +6,3 @@ from API.busAPI import BusAPI
 from API.dataAPI import DataAPI
 from API.tokenAPI import TokenAPI
 from API.phoneAPI import PhoneAPI
-from API.timebankAPI import TimebankAPI
