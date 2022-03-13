@@ -16,7 +16,7 @@ spec:
         app: chatbot
     spec:
       containers:
-      - image: gcr.io/predictive-goal-263306/nthu-line-flask:latest
+      - image: gcr.io/${PROJECT_ID}/nthu-line-flask:latest
         imagePullPolicy: Always
         name: nthu-line-flask
         ports:
