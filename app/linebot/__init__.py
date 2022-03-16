@@ -8,8 +8,8 @@ from API import TokenAPI, UserAPI
 # token, webhook, _ = t.getAuth(mode)
 
 # official:
-token = 'OFFICIAL_TOKEN'
-webhook = 'WEBHOOK_STRING'
+token = '${LINE_OFFICIAL_TOKEN}'
+webhook = '${LINE_WEBHOOK_STRING}'
 
 # beta:
 # token = 'BETA_TOKEN'
