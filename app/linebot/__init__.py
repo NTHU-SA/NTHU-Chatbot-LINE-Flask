@@ -1,7 +1,7 @@
 from linebot import LineBotApi, WebhookHandler
 from API import TokenAPI, UserAPI
 
-# mode = 'official' # 只要改這個模式就好
+mode = 'official' # 只要改這個模式就好
 
 # 取得 token & webhook
 # t = TokenAPI()
