@@ -233,3 +233,5 @@ class UserAPI(API):
             err = 'user location record error'
             return location, err
     
+    # TODO: Add updateBroadcastTag
+    

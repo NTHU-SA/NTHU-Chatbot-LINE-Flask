@@ -60,8 +60,22 @@ class RichmenuHandler:
         elif em == "防疫Q&A":
             self.line_bot_api.reply_message(reply_token, epidemicT.qa_info())
             self.user.setFlag(user_id, 'epidemic_qa')
+        
+        # TODO: Remove COVID publications
         elif em == "新型冠狀病毒相關公告":
             self.line_bot_api.reply_message(reply_token, epidemicT.epidemic_info_carousel())
+        # TODO: Add toggle broadcast
+        # em == "切換主動推播"
+        # self.line_bot_api.reply_message() from broadcastT.py
+
+        # TODO: Add enable broadcast
+        # em == "關閉主動推播"
+        # user.updateBroadcastTag('9999-12-31')
+        
+        # TODO: Add disable broadcast
+        # em == "開啟主動推播"
+        # user.updateBroadcastTag('1980-01-01')
+
         elif em == "校務專區":
             self.line_bot_api.reply_message(reply_token, affairT.affair_info_carousel())
         elif em == "哈哈":
