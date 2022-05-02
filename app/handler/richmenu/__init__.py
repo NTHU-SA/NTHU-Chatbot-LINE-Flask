@@ -4,7 +4,7 @@ import json
 
 from app import app
 from API import UserAPI, BusAPI, DataAPI
-from app.handler.richmenu.template import busT, epidemicT, locationT, stopT, affairT, recnewsT, linggleT, usrT, phoneT, recruitmentT, pointT
+from app.handler.richmenu.template import busT, epidemicT, locationT, stopT, affairT, recnewsT, linggleT, usrT, phoneT, recruitmentT, pointT, broadcastT
 from app.handler.command.template import IntroTemplate
 from utils import busUtil, locationUtil, recnewUtil, schoolRecruitUtil
 
@@ -61,20 +61,15 @@ class RichmenuHandler:
             self.line_bot_api.reply_message(reply_token, epidemicT.qa_info())
             self.user.setFlag(user_id, 'epidemic_qa')
         
-        # TODO: Remove COVID publications
-        elif em == "新型冠狀病毒相關公告":
-            self.line_bot_api.reply_message(reply_token, epidemicT.epidemic_info_carousel())
-        # TODO: Add toggle broadcast
-        # em == "切換主動推播"
-        # self.line_bot_api.reply_message() from broadcastT.py
+        # elif em == "新型冠狀病毒相關公告":
+        #     self.line_bot_api.reply_message(reply_token, epidemicT.epidemic_info_carousel())
 
-        # TODO: Add enable broadcast
-        # em == "關閉主動推播"
-        # user.updateBroadcastTag('9999-12-31')
-        
-        # TODO: Add disable broadcast
-        # em == "開啟主動推播"
-        # user.updateBroadcastTag('1980-01-01')
+        elif em == "切換主動推播":
+            self.line_bot_api.reply_message(broadcastT.broadcast_info(self.user)) 
+        elif em == "關閉主動推播":
+            user.updateBroadcastTag(2000000000)
+        elif em == "開啟主動推播":
+            user.updateBroadcastTag(0)
 
         elif em == "校務專區":
             self.line_bot_api.reply_message(reply_token, affairT.affair_info_carousel())
