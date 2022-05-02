@@ -234,4 +234,34 @@ class UserAPI(API):
             return location, err
     
     # TODO: Add updateBroadcastTag
-    
+    def updateBroadcastTag(self, user_id, state):
+        '''設定使用者的上次被推播的時間戳
+            Params:
+                - user_id: 賴使用者的id
+                - tag: Timestamp
+            Return:
+                - err
+        '''
+        err = None
+
+        url = self.user_url + '/map/insert'
+        data = {
+            'userID': user_id,
+            'location': location
+        }
+
+        try:
+            r = requests.post(url, data=data)
+            r_json = r.json()
+
+            if r.status_code == 200:
+                return err
+            elif r.status_code == 404:
+                err = 'api not found，404'
+                return err
+            elif r.status_code == 503:
+                err = 'Service Unavailable，503'
+                return err
+        except:
+            err = 'user location insert error'
+            return err
