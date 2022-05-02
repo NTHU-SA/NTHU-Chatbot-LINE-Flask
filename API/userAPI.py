@@ -233,8 +233,7 @@ class UserAPI(API):
             err = 'user location record error'
             return location, err
     
-    # TODO: Add updateBroadcastTag
-    def updateBroadcastTag(self, user_id, state):
+    def updateBroadcastTag(self, user_id, tag):
         '''設定使用者的上次被推播的時間戳
             Params:
                 - user_id: 賴使用者的id
@@ -244,10 +243,10 @@ class UserAPI(API):
         '''
         err = None
 
-        url = self.user_url + '/map/insert'
+        url = self.user_url + '/updateBroadcastTag'
         data = {
             'userID': user_id,
-            'location': location
+            'tag': tag
         }
 
         try:
