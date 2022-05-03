@@ -1,8 +1,6 @@
 from linebot.models import *
 
-def broadcast_info(user): #公車路線清單
-    # TODO: Get user toggle status (Big stuff)
-    toggle = user.getBroadcastAudienceIds()
+def broadcast_info(toggle): #公車路線清單
     if toggle:
         return TemplateSendMessage(
             alt_text='公車路線清單',
