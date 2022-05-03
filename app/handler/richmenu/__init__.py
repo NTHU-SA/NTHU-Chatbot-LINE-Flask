@@ -45,7 +45,7 @@ class RichmenuHandler:
         if em == "校園公車時間表": #回覆公車路線template
             self.line_bot_api.reply_message(reply_token, busT.bus_route_template())
         elif em == "校園地圖查詢":
-            location,err = user.getMapRecord(user_id)
+            location, err = user.getMapRecord(user_id)
             if err:
                 self.line_bot_api.reply_message(reply_token, TextSendMessage(text=err))
             elif not location:  #若取得map record為空
@@ -65,7 +65,8 @@ class RichmenuHandler:
         #     self.line_bot_api.reply_message(reply_token, epidemicT.epidemic_info_carousel())
 
         elif em == "切換主動推播":
-            self.line_bot_api.reply_message(broadcastT.broadcast_info(self.user)) 
+            ids, err = user.getBroadcastAudienceIds(user_id)
+            self.line_bot_api.reply_message(broadcastT.broadcast_info(len(ids) > 0)) 
         elif em == "關閉主動推播":
             user.updateBroadcastTag(2000000000)
         elif em == "開啟主動推播":
