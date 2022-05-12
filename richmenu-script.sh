@@ -87,7 +87,11 @@ curl -v -X POST https://api.line.me/v2/bot/richmenu \
 }'
 
 
-curl -v -X POST https://api.line.me/v2/bot/richmenu/richmenu-02fd8dc39fdeb6acb99d6d8f920e3a80/content \
+curl -v -X POST https://api-data.line.me/v2/bot/richmenu/richmenu-02fd8dc39fdeb6acb99d6d8f920e3a80/content \
 -H "Authorization: Bearer ${LINE_OFFICIAL_TOKEN}" \
 -H "Content-Type: image/png" \
 -T richmenu-index-vRE.png
+
+curl -v -X POST https://api.line.me/v2/bot/user/all/richmenu/richmenu-19682466851b21e2d7c0ed482ee0930f \
+-H 'Authorization: Bearer {channel access token}'
+-H 'Content-Length: 0'
