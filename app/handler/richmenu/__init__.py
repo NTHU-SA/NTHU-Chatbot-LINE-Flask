@@ -67,7 +67,7 @@ class RichmenuHandler:
         # 確認機制寫在選單裡面，確保使用者不會卡死在主動推播選單。
         elif em == "切換主動推播":
             ids, err = user.getBroadcastAudienceIds(user_id)
-            self.line_bot_api.reply_message(broadcastT.broadcast_info(len(ids) > 0)) 
+            self.line_bot_api.reply_message(reply_token, broadcastT.broadcast_info(len(ids) > 0)) 
         elif em == "關閉主動推播":
             user.updateBroadcastTag(2000000000)
         elif em == "開啟主動推播":
