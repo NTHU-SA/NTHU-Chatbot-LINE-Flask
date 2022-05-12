@@ -279,7 +279,7 @@ class UserAPI(API):
         data = { 'userID': user_id }
 
         try:
-            r = requests.post(url, data=data)
+            r = requests.get(url, data=data)
             r_json = r.json()
             ids = r_json['result']
 
@@ -291,5 +291,6 @@ class UserAPI(API):
                 err = 'Service Unavailable，503'
         except:
             err = 'get user broadcast tag error'
+            ids = []
         finally:
             return ids, err

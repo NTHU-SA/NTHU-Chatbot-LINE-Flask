@@ -1,6 +1,6 @@
 from linebot.models import *
 
-def broadcast_info(toggle): #公車路線清單
+def broadcast_info(toggle):
     if toggle:
         return TemplateSendMessage(
             alt_text='公車路線清單',
