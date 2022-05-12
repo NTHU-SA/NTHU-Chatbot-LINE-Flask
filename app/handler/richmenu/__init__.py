@@ -76,6 +76,7 @@ class RichmenuHandler:
         elif em == "校務專區":
             self.line_bot_api.reply_message(reply_token, affairT.affair_info_carousel())
         elif em == "哈哈":
+            # TODO: Fix richmenu
             self.line_bot_api.link_rich_menu_to_user(user_id, "richmenu-40a91b3a104119f90757b48253ab9c11")
         # TODO: USR專區
         # elif em == '清華大學USR':
