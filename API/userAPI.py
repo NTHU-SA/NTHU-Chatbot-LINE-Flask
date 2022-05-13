@@ -276,10 +276,9 @@ class UserAPI(API):
         err = None
 
         url = self.user_url + '/getBroadcastAudienceIds'
-        data = { 'userID': user_id }
 
         try:
-            r = requests.get(url, data=data)
+            r = requests.get(url, params={'userID': user_id})
             r_json = r.json()
             ids = r_json['result']
 
