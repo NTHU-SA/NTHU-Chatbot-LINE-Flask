@@ -69,9 +69,11 @@ class RichmenuHandler:
             ids, err = user.getBroadcastAudienceIds(user_id)
             self.line_bot_api.reply_message(reply_token, broadcastT.broadcast_info(len(ids) > 0)) 
         elif em == "關閉主動推播":
-            user.updateBroadcastTag(2000000000)
+            user.updateBroadcastTag(user_id, 2000000000)
+            self.line_bot_api.reply_message(reply_token, TextSendMessage(text="主動推播已經關閉囉，我會安靜的汪"))
         elif em == "開啟主動推播":
-            user.updateBroadcastTag(0)
+            user.updateBroadcastTag(user_id, 0)
+            self.line_bot_api.reply_message(reply_token, TextSendMessage(text="主動推播已經開啟囉"))
 
         elif em == "校務專區":
             self.line_bot_api.reply_message(reply_token, affairT.affair_info_carousel())
