@@ -1,5 +1,5 @@
 curl -v -X POST https://api.line.me/v2/bot/richmenu \
--H 'Authorization: Bearer IJxxE2NqCNJLMH4liIYBA3/yEu6/hp/MRbNvIpqH2j0ESxIjzg1TaJWe++84w8rtYuLsm6r9hjvdxpm5OBZhR/UUZNMkFg3cdtYsBAz28c5/RatimG2BjZxss243ssV6VQrNVX6avy2JNaXIdi+xwgdB04t89/1O/w1cDnyilFU=' \
+-H 'Authorization: Bearer ${LINE_OFFICIAL_TOKEN}' \
 -H 'Content-Type: application/json' \
 -d \
 '{
@@ -44,7 +44,7 @@ curl -v -X POST https://api.line.me/v2/bot/richmenu \
           },
           "action": {
               "type": "message",
-              "text": "[選單]新型冠狀病毒相關公告"
+              "text": "[選單]切換主動推播"
           }
       },
       {
@@ -87,7 +87,11 @@ curl -v -X POST https://api.line.me/v2/bot/richmenu \
 }'
 
 
-curl -v -X POST https://api.line.me/v2/bot/richmenu/richmenu-02fd8dc39fdeb6acb99d6d8f920e3a80/content \
--H "Authorization: Bearer AUTH_TOKEN" \
+curl -v -X POST https://api-data.line.me/v2/bot/richmenu/richmenu-02fd8dc39fdeb6acb99d6d8f920e3a80/content \
+-H "Authorization: Bearer ${LINE_OFFICIAL_TOKEN}" \
 -H "Content-Type: image/png" \
 -T richmenu-index-vRE.png
+
+curl -v -X POST https://api.line.me/v2/bot/user/all/richmenu/richmenu-19682466851b21e2d7c0ed482ee0930f \
+-H 'Authorization: Bearer {channel access token}'
+-H 'Content-Length: 0'

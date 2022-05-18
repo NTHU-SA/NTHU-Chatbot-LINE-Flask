@@ -222,14 +222,74 @@ class UserAPI(API):
 
             if r.status_code == 200:
                 location = r_json['result']
-                return location, err
+                return location, None
             elif r.status_code == 404:
                 err = 'api not found，404'
-                return flag, err
+                return None, err
             elif r.status_code == 503:
                 err = 'Service Unavailable，503'
-                return flag, err
+                return None, err
         except:
             err = 'user location record error'
-            return location, err
+            return None, err
     
+    def updateBroadcastTag(self, user_id, tag):
+        '''設定使用者的上次被推播的時間戳
+            Params:
+                - user_id: 賴使用者的id
+                - tag: Timestamp
+            Return:
+                - err
+        '''
+        err = None
+
+        url = self.user_url + '/updateBroadcastTag'
+        data = {
+            'userID': user_id,
+            'tag': tag
+        }
+
+        try:
+            r = requests.post(url, data=data)
+            r_json = r.json()
+
+            if r.status_code == 200:
+                return err
+            elif r.status_code == 404:
+                err = 'api not found，404'
+                return err
+            elif r.status_code == 503:
+                err = 'Service Unavailable，503'
+                return err
+        except:
+            err = 'user broadcast tag update error'
+            return err
+
+    def getBroadcastAudienceIds(self, user_id):
+        '''取得要被推播的使用者 id
+            Params:
+                - user_id: 賴使用者的id (Optional)
+            Return:
+                - [userID]
+                - err
+        '''
+        err = None
+
+        url = self.user_url + '/getBroadcastAudienceIds'
+
+        try:
+            r = requests.get(url, params={'userID': user_id})
+            r_json = r.json()
+            ids = r_json['result']
+
+            if r.status_code == 200:
+                err = None
+            elif r.status_code == 404:
+                err = 'api not found，404'
+            elif r.status_code == 503:
+                err = 'Service Unavailable，503'
+        except:
+            err = 'get user broadcast tag error'
+            ids = []
+        finally:
+            return ids, err

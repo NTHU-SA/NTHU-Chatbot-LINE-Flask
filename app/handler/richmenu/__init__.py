@@ -4,7 +4,7 @@ import json
 
 from app import app
 from API import UserAPI, BusAPI, DataAPI
-from app.handler.richmenu.template import busT, epidemicT, locationT, stopT, affairT, recnewsT, linggleT, usrT, phoneT, recruitmentT, pointT
+from app.handler.richmenu.template import busT, epidemicT, locationT, stopT, affairT, recnewsT, linggleT, usrT, phoneT, recruitmentT, pointT, broadcastT
 from app.handler.command.template import IntroTemplate
 from utils import busUtil, locationUtil, recnewUtil, schoolRecruitUtil
 
@@ -45,7 +45,7 @@ class RichmenuHandler:
         if em == "校園公車時間表": #回覆公車路線template
             self.line_bot_api.reply_message(reply_token, busT.bus_route_template())
         elif em == "校園地圖查詢":
-            location,err = user.getMapRecord(user_id)
+            location, err = user.getMapRecord(user_id)
             if err:
                 self.line_bot_api.reply_message(reply_token, TextSendMessage(text=err))
             elif not location:  #若取得map record為空
@@ -60,11 +60,25 @@ class RichmenuHandler:
         elif em == "防疫Q&A":
             self.line_bot_api.reply_message(reply_token, epidemicT.qa_info())
             self.user.setFlag(user_id, 'epidemic_qa')
-        elif em == "新型冠狀病毒相關公告":
-            self.line_bot_api.reply_message(reply_token, epidemicT.epidemic_info_carousel())
+        
+        # elif em == "新型冠狀病毒相關公告":
+        #     self.line_bot_api.reply_message(reply_token, epidemicT.epidemic_info_carousel())
+
+        # 確認機制寫在選單裡面，確保使用者不會卡死在主動推播選單。
+        elif em == "切換主動推播":
+            ids, err = user.getBroadcastAudienceIds(user_id)
+            self.line_bot_api.reply_message(reply_token, broadcastT.broadcast_info(len(ids) > 0)) 
+        elif em == "關閉主動推播":
+            user.updateBroadcastTag(user_id, 2000000000)
+            self.line_bot_api.reply_message(reply_token, TextSendMessage(text="主動推播已經關閉囉，我會安靜的汪"))
+        elif em == "開啟主動推播":
+            user.updateBroadcastTag(user_id, 0)
+            self.line_bot_api.reply_message(reply_token, TextSendMessage(text="主動推播已經開啟囉"))
+
         elif em == "校務專區":
             self.line_bot_api.reply_message(reply_token, affairT.affair_info_carousel())
         elif em == "哈哈":
+            # TODO: Fix richmenu
             self.line_bot_api.link_rich_menu_to_user(user_id, "richmenu-40a91b3a104119f90757b48253ab9c11")
         # TODO: USR專區
         # elif em == '清華大學USR':
